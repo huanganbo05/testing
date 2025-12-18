@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>UZIN | 产品介绍</title>
+  <style>
+    :root{
+      --bg: #0b0b10;
+      --text: #1d1d24;
+      --muted: #6b6b76;
+      --card: #ffffff;
+      --line: #ececf2;
+      --accent: #6b4cff;   /* 紫 */
+      --accent2:#ff5ca8;   /* 粉 */
+      --shadow: 0 12px 30px rgba(0,0,0,.08);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC",
+                   "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+      color:var(--text);
+      background: #fafafe;
+    }
+
+    /* 顶部导航（类似你截图那种白底大字） */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 18px 10px;
+      display:flex;
+      align-items:flex-end;
+      gap: 18px;
+      justify-content: space-between;
+    }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width: 150px;
+    }
+    .brand .logo{
+      font-weight: 900;
+      letter-spacing: .08em;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .brand .tag{
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1;
+    }
+    nav{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 26px;
+      justify-content:flex-end;
+      align-items:flex-end;
+    }
+    .navlink{
+      position:relative;
+      text-decoration:none;
+      color: #2a2a33;
+      font-weight: 800;
+      font-size: 22px;
+      padding: 6px 0 14px;
+      letter-spacing: .01em;
+    }
+    .navlink:hover{ color: var(--accent); }
+
+    .navlink.active{
+      color: var(--accent);
+    }
+    .navlink.active::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:6px;
+      height:4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    /* 页面主体 */
+    main{
+      max-width: 1100px;
+      margin: 34px auto 70px;
+      padding: 0 18px;
+    }
+    .hero{
+      display:flex;
+      gap: 18px;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+    .hero-card{
+      flex: 1 1 520px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+    .kicker{
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    h1{
+      margin: 10px 0 10px;
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .desc{
+      color: #3b3b45;
+      font-size: 16px;
+      line-height: 1.75;
+      margin: 0 0 18px;
+    }
+
+    .panel{
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px dashed var(--line);
+    }
+    .line{
+      font-size: 16px;
+      color:#2b2b35;
+      margin: 0 0 16px;
+      font-weight: 700;
+    }
+    .line span{
+      font-weight: 600;
+      color: #444457;
+    }
+
+    .actions{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #222233;
+      font-weight: 800;
+      text-decoration:none;
+      transition: transform .06s ease, box-shadow .18s ease, border-color .18s ease;
+      box-shadow: 0 8px 16px rgba(0,0,0,.06);
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(107,76,255,.35);
+      box-shadow: 0 12px 24px rgba(107,76,255,.12);
+    }
+    .btn.primary{
+      border: none;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(107,76,255,.20);
+    }
+    .btn.primary:hover{
+      box-shadow: 0 18px 36px rgba(107,76,255,.28);
+    }
+
+    .hint{
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* 切换显示 */
+    section[data-page] { display:none; }
+    section[data-page].show { display:block; }
+
+    /* 响应式 */
+    @media (max-width: 720px){
+      .navlink{ font-size: 18px; }
+      h1{ font-size: 28px; }
+      .brand{ min-width: auto; }
+      .nav-wrap{ align-items: center; padding-bottom: 12px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav-wrap">
+      <div class="brand">
+        <div class="logo">UZIN</div>
+        <div class="tag">产品介绍 / 资料下载</div>
+      </div>
+
+      <nav>
+        <a class="navlink" href="#home" data-link="home">Home</a>
+        <a class="navlink" href="#type1" data-link="type1">产品类型 1</a>
+        <a class="navlink" href="#type2" data-link="type2">产品类型 2</a>
+        <a class="navlink" href="#type3" data-link="type3">产品类型 3</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Home -->
+    <section data-page="home" class="show">
+      <div class="hero">
+        <div class="hero-card">
+          <div class="kicker">WELCOME</div>
+          <h1>UZIN 产品介绍主页</h1>
+          <p class="desc">
+            这里展示 UZIN 的产品分类与资料下载入口。请点击上方导航栏进入不同产品类型页面。
+          </p>
+
+          <div class="panel">
+            <p class="line">快速入口：<span>选择上方任意“产品类型”开始查看介绍与下载 PDF。</span></p>
+            <div class="actions">
+              <a class="btn primary" href="#type1">进入 产品类型 1</a>
+              <a class="btn" href="#type2">进入 产品类型 2</a>
+              <a class="btn" href="#type3">进入 产品类型 3</a>
+            </div>
+
+            <div class="hint">
+              你之后只需要改每个产品页里的：<br/>
+              1) “产品介绍：xxxxx” 文本<br/>
+              2) PDF 文件路径（比如 <b>assets/uzin_type1.pdf</b>）<br/>
+              3) 外部跳转网址（比如 <b>https://example.com</b>）
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 产品类型 1 -->
+    <section data-page="type1">
+      <div class="hero-card">
+        <div class="kicker">PRODUCT TYPE 1</div>
+        <h1>产品类型 1</h1>
+
+        <div class="panel">
+          <p class="line">产品介绍：<span>xxxxx（这里写你的产品类型1介绍）</span></p>
+          <div class="actions">
+            <!-- ✅ 把 assets/uzin_type1.pdf 换成你的真实 pdf 路径 -->
+            <a class="btn primary" href="66cn.pdf" download>Download PDF</a>
+            <!-- ✅ 把 https://example.com 换成你要跳转的网站 -->
+            <a class="btn" href="https://www.bilibili.com/video/BV1ySqXBJEYR/?share_source=copy_web&vd_source=7c44b5f4f3f9625f09f035b218c44a87"
+   target="_blank" rel="noopener">
+  跳转到 B 站视频
+</a>
+          </div>
+          <div class="hint">提示：把 pdf 放到同目录的 <b>assets/</b> 文件夹里，然后把上面的链接改成你的文件名。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 产品类型 2 -->
+    <section data-page="type2">
+      <div class="hero-card">
+        <div class="kicker">PRODUCT TYPE 2</div>
+        <h1>产品类型 2</h1>
+
+        <div class="panel">
+          <p class="line">产品介绍：<span>xxxxx（这里写你的产品类型2介绍）</span></p>
+          <div class="actions">
+            <a class="btn primary" href="assets/uzin_type2.pdf" download>Download PDF</a>
+            <a class="btn" href="https://example.com" target="_blank" rel="noopener">跳转到 xxx 网站</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 产品类型 3 -->
+    <section data-page="type3">
+      <div class="hero-card">
+        <div class="kicker">PRODUCT TYPE 3</div>
+        <h1>产品类型 3</h1>
+
+        <div class="panel">
+          <p class="line">产品介绍：<span>xxxxx（这里写你的产品类型3介绍）</span></p>
+          <div class="actions">
+            <a class="btn primary" href="assets/uzin_type3.pdf" download>Download PDF</a>
+            <a class="btn" href="https://example.com" target="_blank" rel="noopener">跳转到 xxx 网站</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // 简单 hash 路由：#home / #type1 / #type2 / #type3
+    const pages = ["home","type1","type2","type3"];
+
+    function showPage(name){
+      if(!pages.includes(name)) name = "home";
+
+      // section 切换
+      document.querySelectorAll("section[data-page]").forEach(sec=>{
+        sec.classList.toggle("show", sec.dataset.page === name);
+      });
+
+      // nav active
+      document.querySelectorAll(".navlink").forEach(a=>{
+        a.classList.toggle("active", a.dataset.link === name);
+      });
+    }
+
+    function onHash(){
+      const hash = (location.hash || "#home").replace("#","");
+      showPage(hash);
+    }
+
+    window.addEventListener("hashchange", onHash);
+    onHash(); // init
+  </script>
+</body>
+</html>
