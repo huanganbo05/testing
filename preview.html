@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>PDF 预览 | UZIN</title>
+  <style>
+    body{ margin:0; font-family: system-ui, -apple-system, "PingFang SC","Microsoft YaHei", Arial, sans-serif; background:#fafafe;}
+    header{
+      position: sticky; top:0; z-index:9;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #ececf2;
+      padding: 12px 14px;
+      display:flex; align-items:center; justify-content:space-between; gap: 10px;
+    }
+    .title{ font-weight: 900; letter-spacing:.06em; }
+    .btn{
+      text-decoration:none;
+      font-weight: 800;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid #ececf2;
+      background:#fff;
+      color:#222;
+    }
+    .wrap{ padding: 12px; }
+    .hint{ color:#6b6b76; font-size: 13px; line-height:1.6; margin: 0 0 10px; }
+    .frame{
+      width: 100%;
+      height: 82vh;
+      border: 1px solid #ececf2;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+    iframe, embed{ width:100%; height:100%; border:0; }
+    .fallback{
+      margin-top: 10px;
+      font-size: 13px;
+      color:#6b6b76;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="title">UZIN | PDF 预览</div>
+    <a class="btn" href="index.html">返回主页</a>
+  </header>
+
+  <div class="wrap">
+    <p class="hint">
+      如果微信里无法直接显示，请点右上角“…” → <b>在浏览器打开</b>。
+    </p>
+
+    <div class="frame">
+      <!-- 优先 iframe 预览 -->
+      <iframe src="66cn.pdf"></iframe>
+      <!-- 你也可以改成 embed（二选一） -->
+      <!-- <embed src="66cn.pdf" type="application/pdf" /> -->
+    </div>
+
+    <div class="fallback">
+      仍然看不到？你也可以：
+      <a href="66cn.pdf" target="_blank" rel="noopener">点击这里打开 PDF</a>
+      或
+      <a href="66cn.pdf" download>下载 PDF</a>
+    </div>
+  </div>
+</body>
+</html>
